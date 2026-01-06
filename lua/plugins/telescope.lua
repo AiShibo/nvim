@@ -30,12 +30,13 @@ return {
 
     telescope.load_extension("file_browser")
 
-    vim.keymap.set(
-      "n",
-      "<leader>sg",
-      "<cmd>Telescope file_browser<CR>",
-      { silent = true, desc = "Search files (browser)" }
-    )
+    vim.keymap.set( "n", "<leader>ff", "<cmd>Telescope file_browser<CR>", 
+	    { silent = true, desc = "Search files (browser)" })
     vim.keymap.set("n", "<leader>sk", "<cmd>Telescope keymaps<CR>", { desc = "Search keymaps" })
+
+    vim.keymap.set("n", "<leader>sg", function()
+	    require("telescope.builtin").live_grep()
+    end, { desc = "Live grep (content search)" })
+
   end,
 }

@@ -10,6 +10,32 @@ return {
   config = function()
     require("neo-tree").setup({
       close_if_last_window = true,
+      default_component_configs = {
+        icon = {
+          folder_closed = "",
+          folder_open = "",
+          folder_empty = "",
+          default = "",
+        },
+        indent = {
+          with_expanders = false,
+          indent_marker = "|",
+          last_indent_marker = "|",
+        },
+        git_status = {
+          symbols = {
+            added = "A",
+            modified = "M",
+            deleted = "D",
+            renamed = "R",
+            untracked = "U",
+            ignored = "I",
+            unstaged = "?",
+            staged = "S",
+            conflict = "!",
+          },
+        },
+      },
 
       filesystem = {
         follow_current_file = { enabled = true },
@@ -30,5 +56,3 @@ return {
     )
   end,
 }
-
-

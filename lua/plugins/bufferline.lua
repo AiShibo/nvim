@@ -9,8 +9,19 @@ return {
     require("bufferline").setup({
       options = {
         diagnostics = "nvim_lsp",
-        show_buffer_close_icons = true,
+        diagnostics_indicator = function(count, level)
+          local tag = "I"
+          if level:match("error") then
+            tag = "E"
+          elseif level:match("warning") then
+            tag = "W"
+          end
+          return string.format(" %s%d", tag, count)
+        end,
+        indicator = { style = "none" },
+        show_buffer_close_icons = false,
         show_close_icon = false,
+        show_tab_indicators = false,
         separator_style = "thin",
         always_show_bufferline = true,
       },
@@ -58,4 +69,3 @@ return {
       { silent = true, desc = "Delete current buffer" })
   end,
 }
-

@@ -3,7 +3,8 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
-	theme = 'nord'
+        icons_enabled = false,
+        theme = "nord",
       },
       sections = {
         lualine_a = { "mode" },
