@@ -10,7 +10,17 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { "filename" },
-        lualine_x = { "encoding", "filetype" },
+        lualine_x = {
+          function()
+            local enabled = vim.g.copilot_enabled
+            if enabled == nil then
+              return "Copilot:?"
+            end
+            return enabled == 1 and "Copilot:on" or "Copilot:off"
+          end,
+          "encoding",
+          "filetype",
+        },
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },
