@@ -65,7 +65,7 @@ return {
       { silent = true, desc = "Close all buffers" })
 
     -- Delete current buffer
-    vim.keymap.set("n", "<leader>db", main_then("bdelete"),
+    vim.keymap.set("n", "<leader>bd", main_then("bdelete"),
       { silent = true, desc = "Delete current buffer" })
   end,
 }
