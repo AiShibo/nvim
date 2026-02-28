@@ -4,7 +4,7 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = "nord",
+        theme = "auto",
       },
       sections = {
         lualine_a = { "mode" },
