@@ -40,13 +40,19 @@ return {
             none = "NONE",
           },
           dawn = {
-            base = "#f7f2e8",
-            surface = "#efe7d8",
-            overlay = "#e4dac8",
-            muted = "#6f655a",
-            subtle = "#554c43",
-            text = "#1f1a14",
-            none = "NONE",
+            base    = "#f9f9fb",
+            surface = "#f0eef5",
+            overlay = "#e6e3ee",
+            muted   = "#9893a5",
+            subtle  = "#6e6a86",
+            text    = "#24213a",
+            love    = "#b4637a",
+            gold    = "#ea9d34",
+            rose    = "#d7827e",
+            pine    = "#286983",
+            foam    = "#56949f",
+            iris    = "#907aa9",
+            none    = "NONE",
           },
         },
       })
@@ -55,17 +61,99 @@ return {
 
       if is_light then
         local hl = vim.api.nvim_set_hl
-        hl(0, "Normal", { fg = "#1f1a14", bg = "#f7f2e8" })
-        hl(0, "NormalNC", { fg = "#2a241d", bg = "#f4ecdd" })
-        hl(0, "SignColumn", { bg = "#f7f2e8" })
-        hl(0, "LineNr", { fg = "#8d7f70", bg = "#f7f2e8" })
-        hl(0, "CursorLineNr", { fg = "#3d342b", bg = "#efe7d8", bold = true })
-        hl(0, "StatusLine", { fg = "#2e261e", bg = "#e4dac8", bold = true })
-        hl(0, "StatusLineNC", { fg = "#7a6e5f", bg = "#efe7d8" })
-        hl(0, "WinBar", { fg = "#2e261e", bg = "#e4dac8", bold = true })
-        hl(0, "WinBarNC", { fg = "#7a6e5f", bg = "#efe7d8" })
-        hl(0, "TabLine", { fg = "#6f655a", bg = "#efe7d8" })
-        hl(0, "TabLineSel", { fg = "#1f1a14", bg = "#e4dac8", bold = true })
+        local bg      = "#f9f9fb"
+        local surface = "#f0eef5"
+        local overlay = "#e6e3ee"
+        local fg      = "#24213a"
+        local fgmuted = "#6e6a86"
+        local fgdim   = "#9893a5"
+
+        -- Base UI
+        hl(0, "Normal",        { fg = fg,      bg = bg })
+        hl(0, "NormalNC",      { fg = fg,      bg = surface })
+        hl(0, "NormalFloat",   { fg = fg,      bg = overlay })
+        hl(0, "FloatBorder",   { fg = fgdim,   bg = overlay })
+        hl(0, "SignColumn",    { bg = bg })
+        hl(0, "CursorLine",    { bg = surface })
+        hl(0, "ColorColumn",   { bg = surface })
+
+        -- Line numbers
+        hl(0, "LineNr",        { fg = fgdim,   bg = bg })
+        hl(0, "CursorLineNr",  { fg = "#907aa9", bg = surface, bold = true })
+
+        -- Status / winbar
+        hl(0, "StatusLine",    { fg = fg,      bg = overlay, bold = false })
+        hl(0, "StatusLineNC",  { fg = fgdim,   bg = surface })
+        hl(0, "WinBar",        { fg = fgmuted, bg = surface })
+        hl(0, "WinBarNC",      { fg = fgdim,   bg = bg })
+        hl(0, "TabLine",       { fg = fgdim,   bg = surface })
+        hl(0, "TabLineSel",    { fg = fg,      bg = overlay, bold = true })
+        hl(0, "TabLineFill",   { bg = surface })
+
+        -- Pmenu (autocomplete)
+        hl(0, "Pmenu",         { fg = fg,      bg = overlay })
+        hl(0, "PmenuSel",      { fg = bg,      bg = "#907aa9", bold = true })
+        hl(0, "PmenuSbar",     { bg = surface })
+        hl(0, "PmenuThumb",    { bg = fgdim })
+
+        -- Cursor
+        hl(0, "Cursor",        { fg = "#faf8f5", bg = "#b4637a" })
+        hl(0, "CursorIM",      { fg = "#faf8f5", bg = "#b4637a" })
+        hl(0, "lCursor",       { fg = "#faf8f5", bg = "#b4637a" })
+        vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr:hor20-Cursor,o:hor50-Cursor"
+
+        -- Search / selection
+        hl(0, "Visual",        { bg = "#ddd8f0" })
+        hl(0, "Search",        { fg = "#24213a", bg = "#f4d8a1", bold = true })
+        hl(0, "IncSearch",     { fg = "#faf8f5", bg = "#ea9d34", bold = true })
+
+        -- Syntax
+        hl(0, "Comment",       { fg = "#a8a4be", italic = true })
+        hl(0, "Keyword",       { fg = "#b4637a", bold = true })
+        hl(0, "Conditional",   { fg = "#b4637a", bold = true })
+        hl(0, "Repeat",        { fg = "#b4637a", bold = true })
+        hl(0, "Function",      { fg = "#286983", bold = true })
+        hl(0, "String",        { fg = "#56949f" })
+        hl(0, "Number",        { fg = "#ea9d34" })
+        hl(0, "Boolean",       { fg = "#ea9d34", bold = true })
+        hl(0, "Type",          { fg = "#907aa9" })
+        hl(0, "Identifier",    { fg = fg })
+        hl(0, "Operator",      { fg = "#d7827e" })
+        hl(0, "Constant",      { fg = "#ea9d34" })
+        hl(0, "PreProc",       { fg = "#d7827e" })
+        hl(0, "Special",       { fg = "#d7827e" })
+
+        -- Treesitter
+        hl(0, "@keyword",           { fg = "#b4637a", bold = true })
+        hl(0, "@keyword.function",  { fg = "#b4637a", bold = true })
+        hl(0, "@keyword.return",    { fg = "#b4637a", bold = true })
+        hl(0, "@function",          { fg = "#286983", bold = true })
+        hl(0, "@function.builtin",  { fg = "#286983" })
+        hl(0, "@method",            { fg = "#286983" })
+        hl(0, "@string",            { fg = "#56949f" })
+        hl(0, "@number",            { fg = "#ea9d34" })
+        hl(0, "@boolean",           { fg = "#ea9d34", bold = true })
+        hl(0, "@type",              { fg = "#907aa9" })
+        hl(0, "@type.builtin",      { fg = "#907aa9", bold = true })
+        hl(0, "@variable",          { fg = fg })
+        hl(0, "@parameter",         { fg = "#56949f" })
+        hl(0, "@property",          { fg = "#286983" })
+        hl(0, "@comment",           { fg = "#a8a4be", italic = true })
+        hl(0, "@operator",          { fg = "#d7827e" })
+        hl(0, "@punctuation",       { fg = fgmuted })
+        hl(0, "@constant",          { fg = "#ea9d34" })
+        hl(0, "@constant.builtin",  { fg = "#ea9d34", bold = true })
+        hl(0, "@tag",               { fg = "#b4637a" })
+        hl(0, "@tag.attribute",     { fg = "#ea9d34" })
+
+        -- Git signs
+        hl(0, "GitSignsAdd",    { fg = "#3d8c5e" })
+        hl(0, "GitSignsChange", { fg = "#ea9d34" })
+        hl(0, "GitSignsDelete", { fg = "#b4637a" })
+
+        -- Borders / separators
+        hl(0, "VertSplit",     { fg = overlay, bg = bg })
+        hl(0, "WinSeparator", { fg = overlay })
       end
 
       pcall(function()
